@@ -1,3 +1,5 @@
+using FileManagementSystem.Core.Services;
+using QuomodoFileManagementSystem.API.Interfaces;
 using QuoQuomodoFileManagementSystem.API.ConfigurationsExtensions;
 using Serilog;
 
@@ -14,6 +16,8 @@ try
 
     // Add services to the container.
     builder.Services.AddSingleton(Log.Logger);
+    builder.Services.AddScoped<IFolderServices, FolderServices>();
+    builder.Services.AddScoped<IFileServices, FileServices>();
 
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

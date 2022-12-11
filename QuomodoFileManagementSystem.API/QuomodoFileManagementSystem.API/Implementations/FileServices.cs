@@ -2,28 +2,29 @@
 
 namespace FileManagementSystem.Core.Services
 {
-    public class FileServices : IFileClassServices
+    public class FileServices : IFileServices
     {
+        private readonly ILogger _logger;
 
-        public FileServices()
+        public FileServices(ILogger<FileServices> logger)
         {
-
+            _logger = logger;
         }
 
         public string UploadFile(IFormFile file, string folderPath)
         {
             try
             {
-
-            if (!Directory.Exists(folderPath))
-            {
-                return "folder not found";
+                _logger.LogInformation($"Attempting to retrieve subfolders from {folderPath}");
+                if (!Directory.Exists(folderPath))
+                {
+                    return "folder not found";
+                }
             }
-            }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                _logger.LogError(ex.Message, $"Unable to create folder");
+                return $"File not uploaded.";
             }
 
             var filePath = Path.Combine(folderPath, file.FileName);
@@ -34,40 +35,47 @@ namespace FileManagementSystem.Core.Services
         {
             try
             {
+                if (filePath == null)
+                {
+                    _logger.LogInformation($"File path is null.");
+                    return "File path cannot be null.";
+                }
 
-            if (!File.Exists(filePath))
-            {
-                return "folder not found";
-            }
-            if (filePath == null)
-            {
-                return "specify file path";
-            }
+                _logger.LogInformation($"Verifying {filePath} existence");
+                if (!File.Exists(filePath))
+                {
+                    return "File path not found";
+                }
 
-            File.Delete(filePath);
-            return "sucessfully deleted";
+                _logger.LogInformation($"File successfully deleted.");
+                File.Delete(filePath);
+                return "File sucessfully deleted.";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                _logger.LogError(ex.Message, $"Unable to delete file");
+                return "File not deleted.";
             }
         }
         public string RenameFile(string fileName, string folderPath, string newFileName)
         {
             try
             {
+                _logger.LogInformation($"Verifying {folderPath} existence");
                 if (!Directory.Exists(folderPath))
                 {
+                    _logger.LogInformation($"{folderPath} does nont exist.");
                     return "file not found";
                 }
-            File.Move(Path.Combine(folderPath, fileName), Path.Combine(folderPath, newFileName));
-            return "update successful";
-            }
-            catch (Exception)
-            {
 
-                throw;
+                File.Move(Path.Combine(folderPath, fileName), Path.Combine(folderPath, newFileName));
+                _logger.LogInformation($"{fileName} successfully renamed.");
+                return "update successful";
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, $"Unable to delete file");
+                return $"Unable to rename {fileName}.";
             }
         }
 
