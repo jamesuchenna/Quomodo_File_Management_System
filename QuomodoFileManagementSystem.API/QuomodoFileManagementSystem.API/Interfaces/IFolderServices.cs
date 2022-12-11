@@ -1,12 +1,4 @@
-﻿using FileManagementSystem.Domain.Dtos;
-using FileManagementSystem.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FileManagementSystem.Core.Interfaces
+﻿namespace QuomodoFileManagementSystem.API.Interfaces
 {
     public interface IFolderServices
     {
