@@ -1,4 +1,4 @@
-using Payment.API.Extensions;
+using QuoQuomodoFileManagementSystem.API.ConfigurationsExtensions;
 using Serilog;
 
 var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
