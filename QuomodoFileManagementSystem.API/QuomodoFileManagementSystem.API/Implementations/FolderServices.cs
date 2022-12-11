@@ -10,6 +10,13 @@ namespace QuomodoFileManagementSystem.API.Interfaces
         {
             _logger = logger;
         }
+
+        /// <summary>
+        /// This methods creates a file in a specific folder path.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public string AddFolder(string name, string path)
         {
             try
@@ -30,6 +37,12 @@ namespace QuomodoFileManagementSystem.API.Interfaces
             }
         }
 
+        /// <summary>
+        /// This methods deletes a file in a specific folder path.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public string DeleteFolder(string name, string path)
         {
             var dir = Path.Combine(path, name);
@@ -50,6 +63,11 @@ namespace QuomodoFileManagementSystem.API.Interfaces
             }
         }
 
+        /// <summary>
+        /// This methods retrieves all file in a specific folder path.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public List<string> GetAllFolderFiles(string path)
         {
             List<string> result = new List<string>();
@@ -71,6 +89,12 @@ namespace QuomodoFileManagementSystem.API.Interfaces
                 throw;
             }
         }
+
+        /// <summary>
+        /// This methods retrieves all subfolders and file in a specific folder path.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public List<string> GetAllSubFoldersAndFiles(string path)
         {
             try
@@ -101,6 +125,11 @@ namespace QuomodoFileManagementSystem.API.Interfaces
             }
         }
 
+        /// <summary>
+        /// This methods retrieves all subfolders in a specific folder path.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public List<string> GetFolder(string path)
         {
             try
@@ -126,6 +155,12 @@ namespace QuomodoFileManagementSystem.API.Interfaces
             }
         }
 
+        /// <summary>
+        /// This methods renames a folder from its specific folder path.
+        /// </summary>
+        /// <param name="folderName"></param>
+        /// <param name="newFolderName"></param>
+        /// <param name="path"></param>
         public void UpdateFolder(string folderName, string newFolderName, string path)
         {
             try

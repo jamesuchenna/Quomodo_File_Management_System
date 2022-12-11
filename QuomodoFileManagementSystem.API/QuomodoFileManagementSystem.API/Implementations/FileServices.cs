@@ -11,6 +11,12 @@ namespace FileManagementSystem.Core.Services
             _logger = logger;
         }
 
+        /// <summary>
+        /// This methods uploads file to a specific folder path.
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="folderPath"></param>
+        /// <returns></returns>
         public string UploadFile(IFormFile file, string folderPath)
         {
             try
@@ -31,6 +37,12 @@ namespace FileManagementSystem.Core.Services
             using (FileStream fs = File.Create(filePath))
                 return file.Name;
         }
+
+        /// <summary>
+        /// This methods deletes a file from a specific folder path.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public string DeleteFile(string filePath)
         {
             try
@@ -57,6 +69,14 @@ namespace FileManagementSystem.Core.Services
                 return "File not deleted.";
             }
         }
+
+        /// <summary>
+        /// This methods renammes a file from a specific folder path.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="folderPath"></param>
+        /// <param name="newFileName"></param>
+        /// <returns></returns>
         public string RenameFile(string fileName, string folderPath, string newFileName)
         {
             try
